@@ -1,0 +1,32 @@
+{
+  "name": "slake-mocha",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Mocha helpers for your Slakefile",
+  "main": "index.js",
+  "scripts": {
+    "test": "slake test"
+  },
+  "dependencies": {
+    "LiveScript": "~1.2.0",
+    "prelude-ls": "~1.0.3",
+    "when": "~2.4.0",
+    "mocha": "1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PPvG/node-slake-mocha.git"
+  },
+  "author": "Peter-Paul van Gemerden <info@ppvg.nl>",
+  "license": {
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  },
+  "keywords": [
+    "LiveScript",
+    "slake",
+    "test",
+    "mocha",
+    "helper"
+  ]
+}
