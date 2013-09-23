@@ -17,8 +17,8 @@ module.exports = mocha
 #
 #     mocha colors:true, ui:\TDD, growl:true, 'test/*'
 #
-# One extra option is the `io` option, which you can use to bind to the
-# `stdio` of the child process. It's set to `'ignore'` by default.
+# One extra option is the `io` option, which determines how the `stdio` of
+# the child process is bound. It's set to `'inherit'` by default.
 #
 # The `compilers` option takes an array and is set to `['ls:LiveScript']`
 # by default. If you override it, but still want the LiveScript compiler,
@@ -27,24 +27,17 @@ module.exports = mocha
 # The file arguments may be strings or arrays, which will be flattened.
 #
 function mocha ...args
-  {opts, files} = incoming args
-  io = if opts.io? then opts.io else \ignore
-  delete opts.io
-  deferred = defer!
+  promise = args |> incoming |> outgoing |> runMocha
+  return promise
 
-  mochaArgs = (outgoing opts) ++ files
-  process = spawn \mocha, mochaArgs, { stdio: io }
-  process.on \exit, (code, signal) ->
-    if signal? or code isnt 0 then deferred.reject!
-    else deferred.resolve!
-
-  return deferred.promise
-
-  function incoming args
+  function incoming ^^args
     opts = if is-type \Object, args[0] then args.shift! else {}
-    {opts, files: flatten args}
+    io = if opts.io? then opts.io else \inherit
+    delete opts.io
+    {opts, files:(flatten args), io}
 
-  function outgoing opts
+  function outgoing {opts, files, io}
+    opts = ^^opts
     if not opts.compilers? then opts.compilers = [\ls:LiveScript]
 
     args = []
@@ -63,5 +56,15 @@ function mocha ...args
       args.push \--compilers
       args.push opts.compilers.join!
 
-    args ++ files
+    {args:(args ++ files), io}
+
+  function runMocha {args, io}
+    deferred = defer!
+
+    process = spawn \mocha, args, { stdio: io }
+    process.on \exit, (code, signal) ->
+      if signal? or code isnt 0 then deferred.reject!
+      else deferred.resolve!
+
+    deferred.promise
 

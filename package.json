@@ -1,6 +1,6 @@
 {
   "name": "slake-mocha",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Mocha helpers for your Slakefile",
   "main": "index.js",
