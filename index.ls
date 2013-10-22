@@ -43,7 +43,7 @@ function mocha ...args
     args = []
     if opts.r or opts.require then args.push \-r, that
     if opts.R or opts.reporter then args.push \-R, that
-    if opts.u or opts.ui then args.push \-ui, that
+    if opts.u or opts.ui then args.push \-u, that
     if opts.t or opts.timeout then args.push \-t, that
     if opts.s or opts.slow then args.push \-s, that
     if opts.w or opts.watch then args.push \-w
