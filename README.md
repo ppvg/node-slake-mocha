@@ -1,6 +1,6 @@
 Helper function for working with [mocha][mocha] from your `Slakefile`. Work in progress.
 
-  [mocha]: http://visionmedia.github.io/mocha/
+  [mocha]: http://mochajs.org/
 
 Installation and usage
 ======================
@@ -48,7 +48,7 @@ One extra option is the `io` option, which determines how the `stdio` of the chi
 The `compilers` option takes an array and is set to `['ls:LiveScript']` by default. If you override it, but still want the LiveScript compiler, you will have to manually add it.
 
   [when]: https://github.com/cujojs/when
-  [opts]: http://visionmedia.github.io/mocha/#usage)
+  [opts]: http://mochajs.org/#usage
   [spawn]: http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
 
 The file arguments may be strings or arrays, which will be flattened:
